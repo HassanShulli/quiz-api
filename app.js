@@ -4,8 +4,8 @@ var app = express();
 const expressJwt = require('express-jwt');
 app.use(morgan('combined'))
 
-var port = process.env.PORT || 8080;    // for heroku
-// var port = 3000;    // for local use
+// var port = process.env.PORT || 8080;    // for heroku
+var port = 3000;    // for local use
 var bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
@@ -33,12 +33,14 @@ app.use(function (req, res, next) {
     }
 });
 
-const question = require('./routers/question');
+const questions = require('./routers/questions');
+const quiz = require('./routers/quiz');
 
 //initialise express router
 var router = express.Router();
 
-app.use("/question", question);
+app.use("/questions", questions);
+app.use("/quiz", quiz);
 
 // catch 404
 app.use(function (req, res) {
@@ -46,8 +48,6 @@ app.use(function (req, res) {
 });
 
 app.listen(port, function () {
-
     console.log("Server listening on port " + port);
-
 });
 module.exports = router;
