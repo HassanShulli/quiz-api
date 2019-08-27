@@ -35,12 +35,14 @@ app.use(function (req, res, next) {
 
 const questions = require('./routers/questions');
 const quiz = require('./routers/quiz');
+const counter = require('./routers/counter');
 
 //initialise express router
 var router = express.Router();
 
 app.use("/questions", questions);
 app.use("/quiz", quiz);
+app.use("/counter", counter);
 
 // catch 404
 app.use(function (req, res) {

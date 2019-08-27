@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 
 const quizCtrl = require('../app/controllers/quizController');
+const counterCtrl = require('../app/controllers/counterController');
 
-router.post('/create', quizCtrl.create);
+router.post('/create', quizCtrl.create, counterCtrl.create);
 router.get('/read', quizCtrl.read);
-router.put('/update', quizCtrl.update);
 router.delete('/delete/:id', quizCtrl.delete);
 
 module.exports = router;

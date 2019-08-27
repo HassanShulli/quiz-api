@@ -1,6 +1,6 @@
 const Quiz = require('../models/Quiz');
 
-exports.create = function (req, res) {
+exports.create = function (req, res, next) {
 
 	var newQuiz = {
 		name : req.body.name,
@@ -13,14 +13,17 @@ exports.create = function (req, res) {
 		if (err) {
             res.json({success: false, result: [], messages: [err.message]});
 		} else {
-            res.json({success: true, result: quiz, messages: []});
+            // res.json({success: true, result: quiz, messages: []});
+
+            req._id = quiz._id;
+            next();
         }
 	})
 }
 
 exports.read = function (req, res) {
 
-	const responseJSON = {success: false, result: [], messages: [], pagination: []}
+	var responseJSON = {success: false, result: [], messages: [], pagination: []}
     
     let queryOptions = {};
     let query = {};
@@ -37,15 +40,25 @@ exports.read = function (req, res) {
 
 	Quiz.paginate(query, queryOptions)
         .then(function (queryResult) {
-
-            responseJSON.success = true;
-                responseJSON.docs = queryResult.docs;
-                responseJSON.pagination = {
+                responseJSON = {success: true,
+                    result: queryResult.docs,
+                    messages: [],
+                    pagination: [{
                     total: queryResult.total,
                     limit: queryResult.limit,
                     page: queryResult.page,
                     pages: queryResult.pages
-                };
+                }]
+                }
+                
+            // responseJSON.success = true;
+            //     responseJSON.docs = queryResult.docs;
+            //     responseJSON.pagination = {
+            //         total: queryResult.total,
+            //         limit: queryResult.limit,
+            //         page: queryResult.page,
+            //         pages: queryResult.pages
+            //     };
                 res.status(200).json(responseJSON)
     })
 }
