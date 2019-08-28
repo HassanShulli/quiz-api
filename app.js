@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 var mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 // mongoose.connect("mongodb://localhost:27017/QUIZ_DB", {useMongoClient: true});  //for local mongo use
-mongoose.connect("mongodb://quiz-admin-1:quiz-admin-1@ds151530.mlab.com:53537/quiz-pro-quo", {useMongoClient: true}); //mlab
+mongoose.connect("mongodb://user:user12@ds253537.mlab.com:53537/quiz-pro-quo", {useMongoClient: true}); //mlab
 mongoose.connection.on('error', function (err) {
     console.error(err);
     process.exit();
