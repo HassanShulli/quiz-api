@@ -33,9 +33,6 @@ exports.read = function (req, res) {
             sort: '-updatedAt'
         }    
 
-        console.log('queryOptions.page : ', queryOptions.page, 'Type : ', typeof queryOptions.page);
-        console.log('queryOptions.limit : ', queryOptions.limit, 'Type : ', typeof queryOptions.limit);
-
 	Question.paginate(query, queryOptions)
         .then(function (queryResult) {
 
@@ -52,7 +49,6 @@ exports.read = function (req, res) {
 }
 
 exports.update = function (req, res) {
-    console.log('req.body Update-- : ', req.body);
 	var updatedQuestion = {
 		question : req.body.question,
 		options : req.body.options,

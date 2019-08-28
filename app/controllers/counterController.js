@@ -20,11 +20,6 @@ exports.create = function (req, res) {
 
 
 exports.update = function (req, res) {
-	console.log(' ');
-
-	console.log('req.body : ', req.body);
-
-	console.log(' ');
 	Counter.findOneAndUpdate({_id: req.body._id}, req.body,
 		function(err, data) {
 			if (err) {
