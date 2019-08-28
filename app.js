@@ -4,8 +4,8 @@ var app = express();
 const expressJwt = require('express-jwt');
 app.use(morgan('combined'))
 
-// var port = process.env.PORT || 8080;    // for heroku
-var port = 3000;    // for local use
+var port = process.env.PORT || 8080;    // for heroku
+// var port = 3000;    // for local use
 var bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
@@ -13,8 +13,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 var mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost:27017/QUIZ_DB", {useMongoClient: true});  //for local mongo use
-// mongoose.connect("mongodb://pos_admin1:pos_admin1@ds151530.mlab.com:51530/pos_app", {useMongoClient: true}); //mlab
+// mongoose.connect("mongodb://localhost:27017/QUIZ_DB", {useMongoClient: true});  //for local mongo use
+mongoose.connect("mongodb://quiz-admin-1:quiz-admin-1@ds151530.mlab.com:53537/quiz-pro-quo", {useMongoClient: true}); //mlab
 mongoose.connection.on('error', function (err) {
     console.error(err);
     process.exit();
